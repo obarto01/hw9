@@ -1,0 +1,206 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>"The Classics" Set List</title>
+<style type="text/css">
+  @media only screen and (max-width: 1080px)
+  {
+    html,body {font-size: 125%; margin: 0;}
+  }
+  @media only screen and (min-width: 1081px)
+  {
+    html,body {font-size: 112%; margin: 0;}
+  }
+
+  header
+  {
+    width: 100%;
+    height: 15%;
+    top: 0;
+    background-color: blue;
+    color: white;
+    font-size: 300%;
+    text-align: center;
+    padding-top: 2%;
+    margin-bottom: 2%;
+    margin-left: 0;
+  }
+
+</style>	
+</head>
+<script   src="https://code.jquery.com/jquery-3.4.1.js"   integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="   crossorigin="anonymous"></script>
+<body>
+	<header>
+   		"The Classics" Set List
+	</header>
+	<div class="bar" style="margin-left: 2%; margin-right: 2%">
+	<form>
+		<label>Genres:</label>	
+		<select id="genre_select">
+			<option value="All">All</option>
+			<option value="Rock and Roll">Rock and Roll</option>
+			<option value="Pop">Pop</option>
+			<option value="Soul">Soul</option>
+			<option value="Grunge Rock">Grunge Rock</option>
+			<option value="Jazz">Jazz</option>
+			<option value="Rap">Rap</option>
+		</select>
+		<br>
+		<button type="button" id="filter_but"> Filter </button>
+		<hr/>
+		<span id = "song_list">&nbsp;</span>
+	</form>
+	</div>
+	<div class="all_txt" style="margin-left: 2%">
+		<script language="javascript">
+			with(document.forms[0])
+			{
+				function show()
+				{
+					strSongs ="";
+					set_list.songs.forEach(function (s)
+					{
+						var curr_song = JSON.stringify(s);
+						var curr_song_mod = curr_song.replace(/"/g, '');
+						strSongs += curr_song_mod + "<br><br>";
+					});
+					song_list.innerHTML = strSongs;
+					filter_but.addEventListener("click", filter);
+				}
+				function filter()
+				{
+					var sel_val = document.getElementById('genre_select').value;
+					if (sel_val != "All")
+					{	
+						$('.all_txt').remove();
+						strSongs ="";
+						set_list.songs.forEach(function (s)
+						{
+							if (s.genres.includes(sel_val))
+							{
+								var curr_song = JSON.stringify(s);
+								var curr_song_mod = curr_song.replace(/"/g, '');
+								strSongs += curr_song_mod + "<br><br>";						
+							}
+						});
+						song_list.innerHTML = strSongs;
+					}
+					else
+					{
+						show();
+					}
+				}
+			}
+		</script>
+
+		<script language="javascript">
+			set_list = {
+				"songs": [
+					{
+						"title": "Beast of Burden",
+						"artists": ["The Rolling Stones"],
+						"genres": ["Rock and Roll"],
+						"year": 1978,
+						toJSON()
+						{
+							return this.title.bold() + "<br> Artist: " + this.artists + "<br> Genre: " + this.genres + "<br> Released " + this.year;
+						}
+					},
+					{
+						"title": "Tiny Dancer",
+						"artists": ["Elton John"],
+						"genres": ["Pop"],
+						"year": 1972,
+						toJSON()
+						{
+							return this.title.bold() + "<br> Artist: " + this.artists + "<br> Genre: " + this.genres + "<br> Released " + this.year;
+						}
+					},
+					{
+						"title": "(Sittin’ On) The Dock Of The Bay",
+						"artists": ["Otis Redding"],
+						"genres": ["Soul", "Pop"],
+						"year": 1967,
+						toJSON()
+						{
+							return this.title.bold() + "<br> Artist: " + this.artists + "<br> Genre: " + this.genres.join(', ') + "<br> Released " + this.year;
+						}
+					},
+					{
+						"title": "Let It Be",
+						"artists": ["The Beatles"],
+						"genres": ["Rock and Roll"],
+						"year": 1970,
+						toJSON()
+						{
+							return this.title.bold() + "<br> Artist: " + this.artists + "<br> Genre: " + this.genres + "<br> Released " + this.year;
+						}
+					},		
+					{
+						"title": "Lithium",
+						"artists": ["Nirvana"],
+						"genres": ["Grunge Rock"],
+						"year": 1991,
+						toJSON()
+						{
+							return this.title.bold() + "<br> Artist: " + this.artists + "<br> Genre: " + this.genres + "<br> Released " + this.year;
+						}
+					},	
+					{
+						"title": "London Calling",
+						"artists": ["The Clash"],
+						"genres": ["Rock and Roll"],
+						"year": 1979,
+						toJSON()
+						{
+							return this.title.bold() + "<br> Artist: " + this.artists + "<br> Genre: " + this.genres + "<br> Released " + this.year;
+						}
+					},
+					{
+						"title": "What a Wonderful World",
+						"artists": ["Louis Armstrong"],
+						"genres": ["Jazz"],
+						"year": 1968,
+						toJSON()
+						{
+							return this.title.bold() + "<br> Artist: " + this.artists + "<br> Genre: " + this.genres + "<br> Released " + this.year;
+						}
+					},
+					{
+						"title": "Imagine",
+						"artists": ["John Lennon"],
+						"genres": ["Rock and Roll"],
+						"year": 1971,
+						toJSON()
+						{
+							return this.title.bold() + "<br> Artist: " + this.artists + "<br> Genre: " + this.genres + "<br> Released " + this.year;
+						}
+					},		
+					{
+						"title": "Jack and Diane",
+						"artists": ["John Mellencamp"],
+						"genres": ["Rock and Roll"],
+						"year": 1982,
+						toJSON()
+						{
+							return this.title.bold() + "<br> Artist: " + this.artists + "<br> Genre: " + this.genres + "<br> Released " + this.year;
+						}
+					},	
+					{
+						"title": "Walk This Way",
+						"artists": ["Aerosmith", "Run DMC"],
+						"genres": ["Rock and Roll", "Rap"],
+						"year": 1986,
+						toJSON()
+						{
+							return this.title.bold() + "<br> Artist: " + this.artists.join(', ') + "<br> Genre: " + this.genres.join(', ') + "<br> Released " + this.year;
+						}		
+					}
+				]
+			}
+			window.onload = show();
+		</script>
+	</div>
+</body>
+</html>
